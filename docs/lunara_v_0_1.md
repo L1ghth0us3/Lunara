@@ -45,14 +45,15 @@
 
 ## InReview
 *(Move items here when a PR is open and needs review.)*
-- [ ] LUN-11: CLI skeleton with rich sections & exit codes `[prio:mid]`
-- [ ] LUN-5: Config schema `lunara.yml` (fields + validation) `[prio:high]`
+*(empty)*
 
 ---
 
 ## Done
 *(Move items here once merged to main.)*
 - [ ] LUN-6: Git adapter MVP (read-only ops) `[prio:high]`
+- [ ] LUN-11: CLI skeleton with rich sections & exit codes `[prio:mid]`
+- [ ] LUN-5: Config schema `lunara.yml` (fields + validation) `[prio:high]`
 
 ---
 
