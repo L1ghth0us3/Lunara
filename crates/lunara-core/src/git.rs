@@ -182,6 +182,58 @@ pub fn ahead_behind(repo_root: &PathBuf) -> Result<(u32, u32), Error> {
     Ok((ahead, behind))
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub struct ShortStat {
+    pub files_changed: u32,
+    pub insertions: u32,
+    pub deletions: u32,
+}
+
+fn parse_shortstat(input: &str) -> ShortStat {
+    // Example formats:
+    // " 1 file changed, 2 insertions(+), 1 deletion(-)"
+    // " 3 files changed, 10 insertions(+)"
+    // " 2 files changed, 5 deletions(-)"
+    let mut files = 0u32;
+    let mut ins = 0u32;
+    let mut del = 0u32;
+    for part in input.trim().split(',') {
+        let t = part.trim();
+        if let Some(x) = t.strip_suffix(" files changed") {
+            files = x.trim().parse().unwrap_or(0);
+        } else if let Some(x) = t.strip_suffix(" file changed") {
+            files = x.trim().parse().unwrap_or(0);
+        } else if let Some(x) = t.strip_suffix(" insertions(+)") {
+            ins = x.trim().parse().unwrap_or(0);
+        } else if let Some(x) = t.strip_suffix(" insertion(+)") {
+            ins = x.trim().parse().unwrap_or(0);
+        } else if let Some(x) = t.strip_suffix(" deletions(-)") {
+            del = x.trim().parse().unwrap_or(0);
+        } else if let Some(x) = t.strip_suffix(" deletion(-)") {
+            del = x.trim().parse().unwrap_or(0);
+        }
+    }
+    ShortStat { files_changed: files, insertions: ins, deletions: del }
+}
+
+pub fn diff_shortstat(repo_root: &PathBuf, staged: bool) -> Result<ShortStat, Error> {
+    let mut cmd = Command::new("git");
+    cmd.arg("diff").arg("--shortstat");
+    if staged { cmd.arg("--staged"); }
+    let out = cmd
+        .current_dir(repo_root)
+        .output()
+        .map_err(|e| Error::Other(format!("git diff --shortstat: {}", e)))?;
+    if !out.status.success() {
+        return Err(Error::Other(format!(
+            "git diff --shortstat failed: {}",
+            String::from_utf8_lossy(&out.stderr)
+        )));
+    }
+    let text = String::from_utf8_lossy(&out.stdout);
+    Ok(parse_shortstat(&text))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -203,5 +255,23 @@ mod tests {
         // One staged (x!=space), one unstaged (y!=space)
         assert_eq!(s.counts.staged, 1);
         assert_eq!(s.counts.unstaged, 1);
+    }
+
+    #[test]
+    fn parse_shortstat_variants() {
+        let s1 = parse_shortstat(" 1 file changed, 2 insertions(+), 1 deletion(-)\n");
+        assert_eq!(s1.files_changed, 1);
+        assert_eq!(s1.insertions, 2);
+        assert_eq!(s1.deletions, 1);
+
+        let s2 = parse_shortstat(" 3 files changed, 10 insertions(+)\n");
+        assert_eq!(s2.files_changed, 3);
+        assert_eq!(s2.insertions, 10);
+        assert_eq!(s2.deletions, 0);
+
+        let s3 = parse_shortstat(" 2 files changed, 5 deletions(-)\n");
+        assert_eq!(s3.files_changed, 2);
+        assert_eq!(s3.insertions, 0);
+        assert_eq!(s3.deletions, 5);
     }
 }

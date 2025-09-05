@@ -32,6 +32,7 @@ The current CLI is a lightweight skeleton to validate UX and gating:
 - repo root and current branch (or detached short SHA)
 - upstream tracking info if available (ahead/behind)
 - change summary: counts of staged, unstaged, and untracked files
+- diff summary: shortstat for unstaged and staged changes (files/+/–)
 
 ## Config (`lunara.yml`)
 

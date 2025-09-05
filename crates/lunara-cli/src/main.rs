@@ -43,10 +43,24 @@ fn cmd_status() -> i32 {
                             up, s.upstream.ahead, s.upstream.behind
                         );
                     }
-                    println!(
-                        "changes: staged {}, unstaged {}, untracked {}",
-                        s.counts.staged, s.counts.unstaged, s.counts.untracked
-                    );
+                    println!("changes: staged {}, unstaged {}, untracked {}",
+                        s.counts.staged, s.counts.unstaged, s.counts.untracked);
+                    if let Ok(st) = lunara_core::git::diff_shortstat(&info.root, false) {
+                        if st.files_changed > 0 {
+                            println!(
+                                "diff(unstaged): {} files, +{}, -{}",
+                                st.files_changed, st.insertions, st.deletions
+                            );
+                        }
+                    }
+                    if let Ok(st) = lunara_core::git::diff_shortstat(&info.root, true) {
+                        if st.files_changed > 0 {
+                            println!(
+                                "diff(staged): {} files, +{}, -{}",
+                                st.files_changed, st.insertions, st.deletions
+                            );
+                        }
+                    }
                 }
                 Err(e) => eprintln!("git status: {}", e),
             }
