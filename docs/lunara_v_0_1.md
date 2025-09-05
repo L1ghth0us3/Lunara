@@ -10,7 +10,7 @@
 - [ ] LUN-2: Architecture blueprint (core, runners, plugins, policies) `[prio:high]`
 - [ ] LUN-3: Choose implementation language for core (Go or Rust) and justify `[prio:mid]`
 - [ ] LUN-4: Specify plugin protocol (JSON-RPC over stdio) draft `[prio:high]`
-- [ ] LUN-6: Git adapter interface (branch, status, diff, commit, amend, push) `[prio:high]`
+// moved to Ready as MVP and actively being implemented
 - [ ] LUN-7: Local runner (shell-agnostic, cross-OS) `[prio:high]`
 - [ ] LUN-8: Intent cache service (.lunara/intent.json) & rebind rules `[prio:high]`
 - [ ] LUN-9: Policy engine (protected branches, docs required) `[prio:high]`
@@ -47,15 +47,6 @@
 *(Move items here when a PR is open and needs review.)*
 - [ ] LUN-11: CLI skeleton with rich sections & exit codes `[prio:mid]`
 - [ ] LUN-5: Config schema `lunara.yml` (fields + validation) `[prio:high]`
-
----
-
-## In Progress
-*(Work started; implementation ongoing.)*
-- [ ] LUN-6: Git adapter MVP (read-only ops) `[prio:high]`
-  - [x] Repo discovery and branch/detached detection using `gix`
-  - [x] Status summary via porcelain parsing (counts, upstream)
-  - [x] Ahead/behind counts via `git rev-list` fallback
 
 ---
 
