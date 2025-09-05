@@ -1,0 +1,13 @@
+# Rust
+target/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Node leftovers (if any templates/tools are used locally)
+node_modules/
+

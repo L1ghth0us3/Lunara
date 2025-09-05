@@ -1,0 +1,15 @@
+[package]
+name = "lunara-cli"
+version = "0.1.0"
+edition = "2025"
+license = "MIT OR Apache-2.0"
+description = "Lunara command-line interface."
+repository = ""
+
+[[bin]]
+name = "lunara"
+path = "src/main.rs"
+
+[dependencies]
+lunara-core = { path = "../lunara-core", version = "0.1.0" }
+

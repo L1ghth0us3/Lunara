@@ -1,0 +1,7 @@
+[workspace]
+members = [
+  "crates/lunara-core",
+  "crates/lunara-cli",
+]
+resolver = "2"
+
