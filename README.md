@@ -13,6 +13,45 @@ Lunara is a Rust-first, language-agnostic workflow tool that enforces a safe, re
 - Tests: `cargo test --all --workspace`
 - Lint/format: `cargo fmt --all -- --check` and `cargo clippy --all-targets -- -D warnings`
 
+## CLI
+
+The current CLI is a lightweight skeleton to validate UX and gating:
+
+- Usage: `lunara <command> [options]`
+- Commands:
+  - `help`: Show help and usage
+  - `version`: Print version information
+  - `init`: Initialize a Lunara config in this repo (stub)
+  - `status`: Show current repo status and gates (stub)
+  - `check`: Run configured checks (stub)
+  - `run`: Execute the configured pipeline (stub)
+- Exit codes: 0=ok, 1=error, 2=usage, 10=checks failed
+
+## Config (`lunara.yml`)
+
+Minimal v1 schema (LUN-5):
+
+```
+version: "1"
+pipeline:
+  languages: [rust, js]
+  gates: [build, lint, test]
+  # timeouts (optional)
+  # timeouts:
+  #   per_step_secs: 600
+  #   overall_secs: 1800
+policies:
+  docs_required: false
+  protected_branches: ["main", "release/*"]
+intent:
+  path: ".lunara/intent.json"
+```
+
+Notes:
+- `languages`: one or more of `rust`, `js`.
+- `gates`: any of `build`, `lint`, `test` (non-empty).
+- If `lunara.yml` is absent, the CLI may fall back to sensible defaults in a future version.
+
 ## Workspace Layout
 - `crates/lunara-core`: Core library (shared types/utilities).
 - `crates/lunara-cli`: Command-line binary (entry point).
@@ -29,4 +68,3 @@ Lunara is a Rust-first, language-agnostic workflow tool that enforces a safe, re
 
 ## License
 Dual-licensed under MIT or Apache-2.0 (see crate manifests). License files will be added before the v0.1.0 release.
-

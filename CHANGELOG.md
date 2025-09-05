@@ -10,6 +10,7 @@ All notable changes to this project are documented here.
 - Contributor guide `AGENTS.md` (Rust-first workflow) with Kanban pointer under `docs/`.
 - Repository Kanban: `docs/lunara_v_0_1.md` outlining v0.1.0 plan.
 - Project `README.md` with overview, quickstart, and layout.
+- CLI: skeleton commands (`help`, `version`, `init`, `status`, `check`, `run`) with exit codes.
 
 ### Changed
 - Repository initialized and pushed to GitHub;
@@ -18,4 +19,3 @@ All notable changes to this project are documented here.
 ### Notes
 - Main branch (`main`) holds initial scaffolding; active development occurs on `0.1-dev`.
 - Future releases will follow semantic versioning; entries will be moved under a tagged section on release.
-

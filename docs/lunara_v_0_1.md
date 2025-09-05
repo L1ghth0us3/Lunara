@@ -10,13 +10,11 @@
 - [ ] LUN-2: Architecture blueprint (core, runners, plugins, policies) `[prio:high]`
 - [ ] LUN-3: Choose implementation language for core (Go or Rust) and justify `[prio:mid]`
 - [ ] LUN-4: Specify plugin protocol (JSON-RPC over stdio) draft `[prio:high]`
-- [ ] LUN-5: Config schema `lunara.yml` v1 (pipeline, policies, intent) `[prio:high]`
 - [ ] LUN-6: Git adapter interface (branch, status, diff, commit, amend, push) `[prio:high]`
 - [ ] LUN-7: Local runner (shell-agnostic, cross-OS) `[prio:high]`
 - [ ] LUN-8: Intent cache service (.lunara/intent.json) & rebind rules `[prio:high]`
 - [ ] LUN-9: Policy engine (protected branches, docs required) `[prio:high]`
 - [ ] LUN-10: Commit composer (conventional commits, amend-after-green) `[prio:mid]`
-- [ ] LUN-11: UX/CLI skeleton (sections, exit codes, diffstat) `[prio:mid]`
 - [ ] LUN-12: JS plugin (@lunara/js): detect, build, lint, test `[prio:high]`
 - [ ] LUN-13: Rust plugin (@lunara/rust): detect toolchain/workspaces, lint (clippy), fmt (rustfmt), test (cargo test) `[prio:high]`
 - [ ] LUN-14: Docs policy module (globs + suggestions) `[prio:mid]`
@@ -39,16 +37,16 @@
 ## Ready
 *(Move items here when design is stable and work can start immediately.)*
 - [ ] LUN-4: Plugin protocol (JSON-RPC over stdio) — finalize message shapes `[prio:high]`
-- [ ] LUN-5: Config schema `lunara.yml` (fields + validation) `[prio:high]`
 - [ ] LUN-7: Local runner MVP (execute, timeout, retry) `[prio:high]`
 - [ ] LUN-6: Git adapter MVP (read-only ops) `[prio:high]`
-- [ ] LUN-11: CLI skeleton with rich sections & exit codes `[prio:mid]`
+ 
 
 ---
 
 ## InReview
 *(Move items here when a PR is open and needs review.)*
-- [ ] (empty)
+- [ ] LUN-11: CLI skeleton with rich sections & exit codes `[prio:mid]`
+- [ ] LUN-5: Config schema `lunara.yml` (fields + validation) `[prio:high]`
 
 ---
 
@@ -132,4 +130,3 @@ To consider Lunara **v0.1.0** complete, the following must be **Done**:
 - [ ] LUN-33: Target matrix hooks (e.g., `wasm32`, `x86_64-pc-windows-msvc`) `[prio:low]`
 - [ ] LUN-34: Caching guidance (`CARGO_HOME`, `RUSTC_WRAPPER`, sccache) `[prio:low]`
 - [ ] LUN-35: Example Rust repo (workspace with 2 crates) `[prio:mid]`
-

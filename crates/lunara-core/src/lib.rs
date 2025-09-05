@@ -6,3 +6,4 @@ pub fn banner() -> String {
     format!("Lunara core ready (v{})", VERSION)
 }
 
+pub mod config;
