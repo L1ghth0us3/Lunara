@@ -7,3 +7,4 @@ pub fn banner() -> String {
 }
 
 pub mod config;
+pub mod git;

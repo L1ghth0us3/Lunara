@@ -26,20 +26,30 @@ fn cmd_init() -> i32 {
 }
 
 fn cmd_status() -> i32 {
-    // Attempt to load config and report status
-    match lunara_core::config::load() {
-        Ok(cfg) => {
+    let mut code = EXIT_OK;
+    // Git info
+    match lunara_core::git::repo_info() {
+        Ok(info) => {
             println!(
-                "Lunara v{} — config loaded (v{})",
-                lunara_core::VERSION, cfg.version
+                "repo: {}\nbranch: {}",
+                info.root.display(),
+                info.branch
             );
-            EXIT_OK
         }
         Err(e) => {
-            eprintln!("Lunara v{} — config not loaded: {}", lunara_core::VERSION, e);
-            EXIT_ERROR
+            eprintln!("git: {}", e);
+            code = EXIT_ERROR;
         }
     }
+    // Config
+    match lunara_core::config::load() {
+        Ok(cfg) => println!("config: loaded (v{})", cfg.version),
+        Err(e) => {
+            eprintln!("config: {}", e);
+            code = EXIT_ERROR;
+        }
+    }
+    code
 }
 
 fn cmd_check() -> i32 {

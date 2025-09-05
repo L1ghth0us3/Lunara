@@ -50,6 +50,12 @@
 
 ---
 
+## In Progress
+*(Work started; implementation ongoing.)*
+- [ ] LUN-6: Git adapter MVP (read-only ops) `[prio:high]`
+
+---
+
 ## Done
 *(Move items here once merged to main.)*
 - [ ] (empty)
