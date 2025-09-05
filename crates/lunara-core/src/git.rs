@@ -148,7 +148,38 @@ pub fn status_summary(repo_root: &PathBuf) -> Result<StatusSummary, Error> {
         )));
     }
     let text = String::from_utf8_lossy(&out.stdout);
-    Ok(parse_porcelain_v1_b(&text))
+    let mut summary = parse_porcelain_v1_b(&text);
+    // If we have an upstream, compute accurate ahead/behind using rev-list
+    if summary.upstream.name.is_some() {
+        if let Ok((ahead, behind)) = ahead_behind(repo_root) {
+            summary.upstream.ahead = ahead;
+            summary.upstream.behind = behind;
+        }
+    }
+    Ok(summary)
+}
+
+pub fn ahead_behind(repo_root: &PathBuf) -> Result<(u32, u32), Error> {
+    let out = Command::new("git")
+        .arg("rev-list")
+        .arg("--left-right")
+        .arg("--count")
+        .arg("HEAD...@{u}")
+        .current_dir(repo_root)
+        .output()
+        .map_err(|e| Error::Other(format!("git rev-list: {}", e)))?;
+    if !out.status.success() {
+        return Err(Error::Other(format!(
+            "git rev-list failed: {}",
+            String::from_utf8_lossy(&out.stderr)
+        )));
+    }
+    let s = String::from_utf8_lossy(&out.stdout);
+    // Output like: "A\tB\n"
+    let mut it = s.trim().split(|c| c == '\t' || c == ' ');
+    let ahead = it.next().and_then(|x| x.parse::<u32>().ok()).unwrap_or(0);
+    let behind = it.next().and_then(|x| x.parse::<u32>().ok()).unwrap_or(0);
+    Ok((ahead, behind))
 }
 
 #[cfg(test)]
