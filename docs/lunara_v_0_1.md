@@ -38,7 +38,7 @@
 *(Move items here when design is stable and work can start immediately.)*
 - [ ] LUN-4: Plugin protocol (JSON-RPC over stdio) — finalize message shapes `[prio:high]`
 - [ ] LUN-7: Local runner MVP (execute, timeout, retry) `[prio:high]`
-- [ ] LUN-6: Git adapter MVP (read-only ops) `[prio:high]`
+ 
  
 
 ---
@@ -52,7 +52,7 @@
 
 ## Done
 *(Move items here once merged to main.)*
-- [ ] (empty)
+- [ ] LUN-6: Git adapter MVP (read-only ops) `[prio:high]`
 
 ---
 
