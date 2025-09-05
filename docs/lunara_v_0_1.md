@@ -53,6 +53,9 @@
 ## In Progress
 *(Work started; implementation ongoing.)*
 - [ ] LUN-6: Git adapter MVP (read-only ops) `[prio:high]`
+  - [x] Repo discovery and branch/detached detection using `gix`
+  - [x] Status summary via porcelain parsing (counts, upstream)
+  - [ ] Ahead/behind via commit graph (pure `gix`)
 
 ---
 

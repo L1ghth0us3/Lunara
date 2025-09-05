@@ -35,6 +35,21 @@ fn cmd_status() -> i32 {
                 info.root.display(),
                 info.branch
             );
+            match lunara_core::git::status_summary(&info.root) {
+                Ok(s) => {
+                    if let Some(up) = s.upstream.name.as_ref() {
+                        println!(
+                            "upstream: {} (ahead {}, behind {})",
+                            up, s.upstream.ahead, s.upstream.behind
+                        );
+                    }
+                    println!(
+                        "changes: staged {}, unstaged {}, untracked {}",
+                        s.counts.staged, s.counts.unstaged, s.counts.untracked
+                    );
+                }
+                Err(e) => eprintln!("git status: {}", e),
+            }
         }
         Err(e) => {
             eprintln!("git: {}", e);

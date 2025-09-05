@@ -27,6 +27,12 @@ The current CLI is a lightweight skeleton to validate UX and gating:
   - `run`: Execute the configured pipeline (stub)
 - Exit codes: 0=ok, 1=error, 2=usage, 10=checks failed
 
+`lunara status` prints read-only repo info (LUN-6):
+
+- repo root and current branch (or detached short SHA)
+- upstream tracking info if available (ahead/behind)
+- change summary: counts of staged, unstaged, and untracked files
+
 ## Config (`lunara.yml`)
 
 Minimal v1 schema (LUN-5):
