@@ -6,7 +6,7 @@
 - crates/: Additional workspace crates (if we split components).
 - tests/: Integration tests (`tests/*.rs`), unit tests inline in modules.
 - benches/ and examples/: Optional performance and usage examples.
-- docs/: Supplemental docs; top-level `README.md` and `CHANGELOG.md`.
+- docs/: Supplemental docs; top-level `README.md` and `CHANGELOG.md`. Kanban board lives under `docs/lunara_v_*.md`.
 - .githooks/: Local git hooks (repo may set `core.hooksPath` to `.githooks`).
 
 ## Build, Test, and Development Commands
