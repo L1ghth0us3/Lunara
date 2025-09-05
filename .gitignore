@@ -11,3 +11,5 @@ target/
 # Node leftovers (if any templates/tools are used locally)
 node_modules/
 
+# Legacy prototype template (not source of truth)
+workflow.mjs.template
