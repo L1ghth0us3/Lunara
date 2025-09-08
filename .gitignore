@@ -7,6 +7,7 @@ target/
 *.swp
 *.swo
 .DS_Store
+.serena/
 
 # Node leftovers (if any templates/tools are used locally)
 node_modules/
